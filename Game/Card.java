@@ -3,40 +3,43 @@ package Game;
 public class Card {
     private final String suite; // Spades", "Hearts", "Clubs" ou "Diamonds"
     private final String rank;//2, 3, 4, ..., 10,
-    //private final int points;
+    private final int points;
 
-    public Card(String suite, String rank) {
+    public Card(String suite, String rank, int points) {
 
         this.suite = suite;
         this.rank = rank;
-        //points = points;
+        this.points = points;
     }
 
     public Card(Card c) {
-
+        this.suite = c.suite;
+        this.rank = c.rank;
+        this.points = c.points;
     }
 
     public String getSuite() {
-            return this.suite;
+        return this.suite;
         }
 
         public String getRank() {
-                return this.rank;
-
+            return this.rank;
         }
 
-        //public int getPoints() {
-        //return this.points;
-        //}
+        public int getPoints() {
+            return this.points;
+        }
 
         //qui retourne true si la carte est un Ace
-        //public boolean isAce() {
-
-        //}
+        public boolean isAce() {
+        if(rank.equals("Ace"))
+            return true;
+        return false;
+        }
 
         //retourne une chaine de caractère : Valeur_rank_variable + " of " + valeur_suite_variable. Par exemple : 3 of Hearts
         public String display () {
-            return this.getRank() + " of " + this.getSuite();
+            return this.rank + " of " + this.suite;
         }
 
     }
