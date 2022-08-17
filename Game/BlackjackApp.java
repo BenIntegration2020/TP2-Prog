@@ -15,27 +15,39 @@ public class BlackjackApp {
         while(playAgain.equalsIgnoreCase("y")) {
             // votre scenario de simulation vient ici
 
-            //créer une instance de BlackJackGame -> new BlackJackGame(playerHand, dealerHand, deck, betAmount )
+            //créer une instance de BlackJackGame
+            game = new BlackjackGame();
 
-           //getTotalMoney (afficher)
-            //prompt de betAmount
+           //Générer et afficher total money
+            game.loadMoney();
+            showMoney();
 
-            //saisir betAmount
-            //showDealerCard()
+            // Demander le betAmount et le valider
+            Double newBet = 0.0;
+            do {newBet = Console.getDouble("Bet amount: ", game.getMinBet(), game.getMaxBet());
+                if(!game.isValidBet(newBet))
+                    System.out.println("Your total money is not enough to bet this amount");}
+            while(!game.isValidBet(newBet));
 
-            //deal() pour créer ajouter deux cartes au playerHand et au dealerHand
-            //afficher les cartes de playerHand sous forme de tableau à deux lignes boucle?
+            //ajouter deux cartes au playerHand et au dealerHand
+            game.deal();
 
-            //getHitOrStand()
+            //showDealerShowCard();
+            //showPlayerHand();
 
-            //Afficher cartes de playerHand sous forme de tableau si hit
+
+            //getHitOrStand() insérer un while
+
+            //Afficher cartes de playerHand sous forme de tableau
+
+            //dealer hit()
             //Afficher cartes du dealer
 
-            //message win ou lose
+            //showWinner()
 
-            //getTotalMoney()
+            //getTotalMoney
 
-            //playAgain = Console.getString("Do you want to play again?", choice);
+            playAgain = Console.getString("Do you want to play again?", choice);
         }
         System.out.println("\nBye!");
     }
@@ -66,24 +78,30 @@ public class BlackjackApp {
 
     // affiche les cartes dans la main du courtier et les cartes dans la main du joueur
     private static void showHands() {
-        showDealerShowCard();
+        showDealerHand();
+        showPlayerHand();
     }
 
     // affiche le message DEALER'S SHOW CARD et puis affiche le deuxieme carte dans la main du courtier
     private static void showDealerShowCard() {
         System.out.println("DEALER'S SHOW CARD");
-        System.out.println(game.getDealerShowCard());
+        System.out.println(game.getDealerShowCard().display());
     }
 
     // affiche le message DEALER'S CARDS et puis affiche les cartes dans la main du courtier
     private static void showDealerHand() {
         System.out.println("DEALER'S CARDS");
-        System.out.println(game.getDealerHand());
+        for (Card card : game.getDealerHand().getCards()) {
+            System.out.println(card);
+        }
     }
 
     // affiche le message YOUR CARDS et puis affiche les cartes dans la main du joueur
     private static void showPlayerHand() {
-        System.out.println("YOUR CARDS: " + game.getPlayerHand());
+        System.out.println("YOUR CARDS");
+        for (Card card : game.getPlayerHand().getCards()) {
+            System.out.println(card);
+        }
     }
 
     // affiche Total money:  et le montant total

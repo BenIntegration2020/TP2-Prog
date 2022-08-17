@@ -10,11 +10,12 @@ public class BlackjackGame {
 
     //Initialiser deck, playerHand, dealerHand, minBet et maxBet
     //le minimum et le maximum de la mise sont de 5 et 1000 respectivement.
-    public BlackjackGame(Hand playerHand, Hand dealerHand, Deck deck, double betAmount) {
+    public BlackjackGame() {
         this.playerHand = new Hand("player");
         this.dealerHand = new Hand("dealer");
         this.deck = new Deck();
         this.betAmount = betAmount;
+        this.totalMoney = totalMoney;
     }
 
     public void loadMoney() {
@@ -64,9 +65,9 @@ public class BlackjackGame {
     // distribue deux cartes pour le joueur (playerHand) et deux cartes pour le courtier (dealerHand).
     public void deal() {
         playerHand.addCard(deck.drawCard());
-        playerHand.addCard(deck.drawCard());
-        dealerHand.addCard(deck.drawCard());
-        dealerHand.addCard(deck.drawCard());
+        //playerHand.addCard(deck.drawCard());
+        //dealerHand.addCard(deck.drawCard());
+        //dealerHand.addCard(deck.drawCard());
     }
 
     //pour distribuer une carte en plus pour le joueur dans le cas où il fait hit.

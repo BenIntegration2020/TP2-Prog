@@ -1,7 +1,6 @@
 package Game;
 
 public class Hand {
-    //demander à Ali si on peut modifier les instances pour mettre un arrayList au lieu d'un array.
     private Card[] hand;
     private String user; //Soit le le joueur soit le courtier. Selon comment on appelle le constrcuteur et le paramertre quand utilise
 
