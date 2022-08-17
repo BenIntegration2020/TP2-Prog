@@ -6,7 +6,9 @@ public class Hand {
 
     private static int cardNb;
     public Hand(String user) {
+        this.hand = new Card[10];
         this.user = user;
+        this.cardNb = 0;
     }
 
     //retroune le tableau hand

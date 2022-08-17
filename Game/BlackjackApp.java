@@ -32,8 +32,8 @@ public class BlackjackApp {
             //ajouter deux cartes au playerHand et au dealerHand
             game.deal();
 
-            //showDealerShowCard();
-            //showPlayerHand();
+            showDealerShowCard();
+            showPlayerHand();
 
 
             //getHitOrStand() insérer un while

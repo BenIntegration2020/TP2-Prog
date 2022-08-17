@@ -18,6 +18,7 @@ public class Deck {
             }
         }
         shuffleDeck();
+        currentCardIndex = 0;
     }
 
 
