@@ -64,10 +64,10 @@ public class BlackjackGame {
 
     // distribue deux cartes pour le joueur (playerHand) et deux cartes pour le courtier (dealerHand).
     public void deal() {
-        playerHand.addCard(deck.drawCard());
-        playerHand.addCard(deck.drawCard());
         dealerHand.addCard(deck.drawCard());
         dealerHand.addCard(deck.drawCard());
+        playerHand.addCard(deck.drawCard());
+        playerHand.addCard(deck.drawCard());
     }
 
     //pour distribuer une carte en plus pour le joueur dans le cas où il fait hit.
@@ -84,14 +84,12 @@ public class BlackjackGame {
 
     //retourne le deuxième carte dans la main du courtier.
     public Card getDealerShowCard() {
-        System.out.println(this.dealerHand.getCards());
-        return null;
-
+        return getDealerHand().getCards()[1];
     }
 
     //retourne dealerHand
     public Hand getDealerHand() {
-        return this.dealerHand;
+        return dealerHand;
     }
 
     //retourne playerHand

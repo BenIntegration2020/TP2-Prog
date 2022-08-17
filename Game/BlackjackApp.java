@@ -33,7 +33,7 @@ public class BlackjackApp {
             game.deal();
 
             showDealerShowCard();
-            showPlayerHand();
+            //showPlayerHand();
 
 
             //getHitOrStand() insérer un while
