@@ -18,19 +18,21 @@ public class Hand {
 
     // retourne la somme des cartes dans le tableau hand. Si la somme est >21, il faut recompter les cartes pour verifier si il y a un ACE. Si oui on le considere comme 1, sinon on ajoute la somme des points
     public int getPoints() {
-        int total = 0;
-        for(Card card: hand)
-            total = total + card.getPoints();
-        if (total > 21){
-            total = 0;
-            for (Card card: hand){
-                if(card.isAce())
-                    total = total + 1;
-                else
-                    total = total + card.getPoints();
+        int totalPoints = 0;
+        for (Card cardInHand : this.hand){
+            if (cardInHand != null) {
+                totalPoints += cardInHand.getPoints();
+            }
+
+        }
+        if (totalPoints > 21) {
+            for (Card cardInHand : this.hand){
+                if (cardInHand != null && cardInHand.isAce()) {
+                    totalPoints -= 10;
+                }
             }
         }
-        return total;
+        return totalPoints;
     }
 
     // ajouter une carte au tableau

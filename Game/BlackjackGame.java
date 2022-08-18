@@ -24,15 +24,12 @@ public class BlackjackGame {
 
     //retourne true le total d’argent dont un joueur dispose est inférieur au minimum de mise. False sinon.
     public boolean isOutOfMoney() {
-        if(this.totalMoney < this.minBet)
-            return true;
-        else
-            return false;
+        return this.totalMoney < this.minBet;
     }
 
     // pour initialiser totalMoney a 100
     public void resetMoney() {
-        totalMoney = 100.0;
+        this.totalMoney = 100.0;
     }
 
     //retourne false si double localBetAmt est inférieur au minBet ou supérieur au maxBet ou supérieur au totalMoney. True sinon.
@@ -109,25 +106,22 @@ public class BlackjackGame {
 
     //retourne true si le player gagne. False sinon.
     public boolean playerWins() {
-        return this.playerHand.getPoints() >= dealerHand.getPoints();
+        return this.playerHand.getPoints() > dealerHand.getPoints() && !playerHand.isBust() || dealerHand.isBust();
     }
 
     // ajoute le montant du mise gagner au montant total
     public void addBetToTotal() {
-        if (playerWins())
-            totalMoney = totalMoney + betAmount;
+        this.totalMoney += this.betAmount;
     }
 
     // ajoute le montant de mise gagner selon 3:2 au montant total dans le cas de blackjack
     public void addBlackjackToTotal() {
-        if(playerHand.isBlackjack())
-            totalMoney = totalMoney + (betAmount * 1.5);
+        this.totalMoney += (this.betAmount * 1.5);
     }
 
     // soustraire le montant du bet perdu du montant total
     public void subtractBetFromTotal() {
-        if(!playerWins())
-            totalMoney = totalMoney - betAmount;
+        this.totalMoney -= this.betAmount;
     }
 
 }

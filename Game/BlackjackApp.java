@@ -9,49 +9,61 @@ public class BlackjackApp {
         System.out.println("BLACKJACK!");
         System.out.println("Blackjack payout is 3:2");
         System.out.println();
-
+        game = new BlackjackGame();
+        game.loadMoney();
         String playAgain = "y";
         String[] choice = {"y", "n"};
         while(playAgain.equalsIgnoreCase("y")) {
             // votre scenario de simulation vient ici
 
             //créer une instance de BlackJackGame
-            game = new BlackjackGame();
 
-           //Générer et afficher total money
-            game.loadMoney();
+
+            //Générer et afficher total money
+
             showMoney();
-
-            // Demander le betAmount et le valider
-            Double newBet = 0.0;
-            do {newBet = Console.getDouble("Bet amount: ", game.getMinBet(), game.getMaxBet());
-                if(!game.isValidBet(newBet))
-                    System.out.println("Your total money is not enough to bet this amount");}
-            while(!game.isValidBet(newBet));
 
             //ajouter deux cartes au playerHand et au dealerHand
             game.deal();
+
+            // Demander le betAmount et le valider
+            getBetAmount();
+
+
 
             showDealerShowCard();
             showPlayerHand();
 
 
             String hitOrStand = getHitOrStand();
+            if (hitOrStand.equalsIgnoreCase("h")) {
+                while ((hitOrStand.equalsIgnoreCase("h")) && (!game.isBlackjackOrBust())){
+                    game.hit();
+                    showPlayerHand();
+                }
+            }
 
 
-            showPlayerHand();
-            showDealerHand();
+
             //getPlayerHand().getPoints();
             //hand.getPlayerHand().getPoints();
 
             //Afficher cartes de playerHand sous forme de tableau
 
             //dealer hit()
+            game.stand();
+
             //Afficher cartes du dealer
 
             //showWinner()
+            showWinner();
 
             //getTotalMoney
+
+            // Verifier si utilisateur a encore assez d'argent de jouer encore, sinon termine la programme
+            if (game.isOutOfMoney()) {
+                break;
+            }
 
             playAgain = Console.getString("Do you want to play again?", choice);
         }
@@ -69,21 +81,18 @@ public class BlackjackApp {
     // affiche le message Bet amount, lire la valeur de la mise saisi par le joueur. Valide cette valeur. Si la valeur n'est pas valide afficher le message Bet must be between
     private static void getBetAmount() {
 
-        Double userResponse = Console.getDouble("How much do you want to bet?");
-        boolean validBet = game.isValidBet(userResponse);
-        if(!validBet)
-            System.out.println("Bet must be between:" + game.getMinBet() + "and" + game.getMaxBet());
+        double newBet = 0.0;
+        do {newBet = Console.getDouble("Bet amount: ", game.getMinBet(), game.getMaxBet());
+            if(!game.isValidBet(newBet))
+                System.out.println("Your total money is not enough to bet this amount");}
+        while(!game.isValidBet(newBet));
+        game.setBet(newBet);
     }
 
     // Affiche le message Hit or Stand? (h/s): et puis retourne ce que le joueur a tappe.
     private static String getHitOrStand() {
-    String[] allowedValues = {"h", "s"};
-    String userResponse = Console.getString("Hit or Stand? (h/s): ", allowedValues);
-        if(userResponse.equalsIgnoreCase("h"))
-            game.hit();
-        //if(userResponse.equalsIgnoreCase("s"))
-            //game.stand();
-        return userResponse;
+        String[] userChoice = {"h","s"};
+        return Console.getString("\nHit or Stand? (h/s): ", userChoice);
     }
 
     // affiche les cartes dans la main du courtier et les cartes dans la main du joueur
