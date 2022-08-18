@@ -9,18 +9,17 @@ public class BlackjackApp {
         System.out.println("BLACKJACK!");
         System.out.println("Blackjack payout is 3:2");
         System.out.println();
-        game = new BlackjackGame();
-        game.loadMoney();
+
         String playAgain = "y";
         String[] choice = {"y", "n"};
         while(playAgain.equalsIgnoreCase("y")) {
             // votre scenario de simulation vient ici
 
             //créer une instance de BlackJackGame
-
+            game = new BlackjackGame();
 
             //Générer et afficher total money
-
+            game.loadMoney();
             showMoney();
 
             //ajouter deux cartes au playerHand et au dealerHand
@@ -29,12 +28,10 @@ public class BlackjackApp {
             // Demander le betAmount et le valider
             getBetAmount();
 
-
-
             showDealerShowCard();
             showPlayerHand();
 
-
+            //Demander hit or stand.
             String hitOrStand = getHitOrStand();
             if (hitOrStand.equalsIgnoreCase("h")) {
                 while ((hitOrStand.equalsIgnoreCase("h")) && (!game.isBlackjackOrBust())){
@@ -43,26 +40,17 @@ public class BlackjackApp {
                 }
             }
 
-
-
-            //getPlayerHand().getPoints();
-            //hand.getPlayerHand().getPoints();
-
-            //Afficher cartes de playerHand sous forme de tableau
-
-            //dealer hit()
             game.stand();
 
-            //Afficher cartes du dealer
-
-            //showWinner()
             showWinner();
 
             //getTotalMoney
 
             // Verifier si utilisateur a encore assez d'argent de jouer encore, sinon termine la programme
             if (game.isOutOfMoney()) {
-                break;
+                boolean moreMoney = buyMoreChips();
+                if(!moreMoney)
+                    break;
             }
 
             playAgain = Console.getString("Do you want to play again?", choice);
@@ -75,6 +63,10 @@ public class BlackjackApp {
         System.out.println("Out of money!");
         String[] allowedValues = {"y", "n"};
         String userResponse = Console.getString("Would you like to add more? (y/n): ", allowedValues);
+        if(userResponse.equalsIgnoreCase(("y"))){
+            game.resetMoney();
+            showMoney();
+        }
         return userResponse.equalsIgnoreCase("y");
     }
 
