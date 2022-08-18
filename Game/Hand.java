@@ -4,7 +4,7 @@ public class Hand {
     private Card[] hand;
     private String user; //Soit le le joueur soit le courtier. Selon comment on appelle le constrcuteur et le paramertre quand utilise
 
-    private static int cardNb;
+    private int cardNb;
     public Hand(String user) {
         this.hand = new Card[10];
         this.user = user;

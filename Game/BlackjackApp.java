@@ -33,10 +33,16 @@ public class BlackjackApp {
             game.deal();
 
             showDealerShowCard();
-            //showPlayerHand();
+            showPlayerHand();
 
 
-            //getHitOrStand() insérer un while
+            String hitOrStand = getHitOrStand();
+
+
+            showPlayerHand();
+            showDealerHand();
+            //getPlayerHand().getPoints();
+            //hand.getPlayerHand().getPoints();
 
             //Afficher cartes de playerHand sous forme de tableau
 
@@ -73,6 +79,10 @@ public class BlackjackApp {
     private static String getHitOrStand() {
     String[] allowedValues = {"h", "s"};
     String userResponse = Console.getString("Hit or Stand? (h/s): ", allowedValues);
+        if(userResponse.equalsIgnoreCase("h"))
+            game.hit();
+        //if(userResponse.equalsIgnoreCase("s"))
+            //game.stand();
         return userResponse;
     }
 
@@ -92,7 +102,8 @@ public class BlackjackApp {
     private static void showDealerHand() {
         System.out.println("DEALER'S CARDS");
         for (Card card : game.getDealerHand().getCards()) {
-            System.out.println(card);
+            if(card != null)
+                System.out.println(card.display());
         }
     }
 
@@ -100,7 +111,8 @@ public class BlackjackApp {
     private static void showPlayerHand() {
         System.out.println("YOUR CARDS");
         for (Card card : game.getPlayerHand().getCards()) {
-            System.out.println(card);
+            if(card != null)
+                System.out.println(card.display());
         }
     }
 
