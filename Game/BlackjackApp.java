@@ -9,7 +9,6 @@ public class BlackjackApp {
         System.out.println("BLACKJACK!");
         System.out.println("Blackjack payout is 3:2");
         System.out.println();
-
         String playAgain = "y";
         String[] choice = {"y", "n"};
         while(playAgain.equalsIgnoreCase("y")) {
@@ -18,18 +17,38 @@ public class BlackjackApp {
             //créer une instance de BlackJackGame
             game = new BlackjackGame();
 
-            //Générer et afficher total money
-            game.loadMoney();
-            showMoney();
+            //Verifier si utilisateur a encore assez d'argent de jouer encore, sinon termine la programme
 
-            //ajouter deux cartes au playerHand et au dealerHand
-            game.deal();
+            //Générer et afficher total money
+           game.loadMoney();
+           //game.getTotalMoney();
+
+            //game.isOutOfMoney();
+              //  if (buyMoreChips())
+                //    game.resetMoney();
+                //if(!buyMoreChips())
+                  //  break;
+
+
+           showMoney();
+
+
+            //if (game.isOutOfMoney()) {
+              //  boolean moreMoney = buyMoreChips();
+
+            //if(moreMoney)
+                //game.resetMoney();
+            //if(!moreMoney)
+              //break;
+            //}
 
             // Demander le betAmount et le valider
             getBetAmount();
 
-            showDealerShowCard();
-            showPlayerHand();
+            //ajouter deux cartes au playerHand et au une au dealerHand
+            game.deal();
+            showHands();
+
 
             //Demander hit or stand.
             String hitOrStand = getHitOrStand();
@@ -41,20 +60,12 @@ public class BlackjackApp {
             }
 
             game.stand();
-
             showWinner();
 
-            //getTotalMoney
-
-            // Verifier si utilisateur a encore assez d'argent de jouer encore, sinon termine la programme
-            if (game.isOutOfMoney()) {
-                boolean moreMoney = buyMoreChips();
-                if(!moreMoney)
-                    break;
-            }
 
             playAgain = Console.getString("Do you want to play again?", choice);
         }
+
         System.out.println("\nBye!");
     }
 
@@ -63,10 +74,9 @@ public class BlackjackApp {
         System.out.println("Out of money!");
         String[] allowedValues = {"y", "n"};
         String userResponse = Console.getString("Would you like to add more? (y/n): ", allowedValues);
-        if(userResponse.equalsIgnoreCase(("y"))){
-            game.resetMoney();
-            showMoney();
-        }
+        //if(userResponse.equalsIgnoreCase("n"))
+          //  break;
+        //showMoney();
         return userResponse.equalsIgnoreCase("y");
     }
 
@@ -89,7 +99,7 @@ public class BlackjackApp {
 
     // affiche les cartes dans la main du courtier et les cartes dans la main du joueur
     private static void showHands() {
-        showDealerHand();
+        showDealerShowCard();
         showPlayerHand();
     }
 
@@ -143,6 +153,6 @@ public class BlackjackApp {
             game.subtractBetFromTotal();
         }
         showMoney();
-        //game.saveMoney();
+        //game.saveMoney(game.getTotalMoney());
     }
 }

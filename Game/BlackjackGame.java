@@ -24,7 +24,9 @@ public class BlackjackGame {
 
     //retourne true le total d’argent dont un joueur dispose est inférieur au minimum de mise. False sinon.
     public boolean isOutOfMoney() {
-        return this.totalMoney < this.minBet;
+        if (this.getTotalMoney() < this.minBet)
+            return true;
+        return false;
     }
 
     // pour initialiser totalMoney a 100
